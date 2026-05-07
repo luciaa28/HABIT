@@ -1,0 +1,59 @@
+{
+  "usuarios": [
+    {
+      "id": "1",
+      "username": "adminLucia",
+      "password": "123",
+      "role": "admin",
+      "email": "adminLucia@gmail.com",
+      "nombre": "Lucia Marcos",
+      "telefono": "+34 600 123 456",
+      "ubicacion": "Leioa, España",
+      "fechaNacimiento": "28 de Diciembre de 2005"
+    },
+        {
+      "id": "2",
+      "username": "adminEkaitz",
+      "password": "123",
+      "role": "admin",
+      "email": "adminEkaitz@gmail.com",
+      "nombre": "Ekaitz Ibanez",
+      "telefono": "+34 600 123 456",
+      "ubicacion": "Sestao, España",
+      "fechaNacimiento": ""
+    },
+        {
+      "id": "3",
+      "username": "adminStanis",
+      "password": "123",
+      "role": "admin",
+      "email": "adminStanis@gmail.com",
+      "nombre": "Stanislav",
+      "telefono": "+34 600 123 456",
+      "ubicacion": "San Ignazio, España",
+      "fechaNacimiento": ""
+    },
+    {
+      "id": "4",
+      "username": "usuario1",
+      "password": "123",
+      "role": "usuario",
+      "email": "usuario1@gmail.com",
+      "nombre": "Usuario1",
+      "telefono": "+34 600 123 456",
+      "ubicacion": "",
+      "fechaNacimiento": ""
+    },
+    {
+      "id": "5",
+      "username": "usuario2",
+      "password": "123",
+      "role": "usuario",
+      "email": "usuario2@gmail.com",
+      "nombre": "Usuario2",
+      "telefono": "+34 600 123 456",
+      "ubicacion": "",
+      "fechaNacimiento": ""
+    }
+  ]
+}

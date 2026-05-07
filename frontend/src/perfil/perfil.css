@@ -1,0 +1,275 @@
+/* ==========================================================================
+   1. IMPORTACIÓN DE FUENTES Y CONFIGURACIÓN GLOBAL
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700;900&display=swap');
+
+:host {
+  display: block;
+}
+
+.scroll-container {
+  height: 100vh;
+  overflow: visible !important;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  font-family: 'Josefin Sans', sans-serif;
+  background-color: #fff;
+}
+
+/* ==========================================================================
+   2. NAVBAR FIJA (Estructura Superior)
+   ========================================================================== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px; /* Altura definida para controlar el scroll */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  background: rgba(255, 255, 255, 0.95); /* Fondo con ligera transparencia */
+  z-index: 1000; /* Siempre por encima del contenido */
+  box-sizing: border-box;
+  overflow: visible !important;
+}
+
+/* Logo y ajustes de imagen */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.8rem;
+  font-weight: 900;
+}
+
+.logo img {
+  height: 60px;
+}
+
+/* Enlaces de navegación centrales */
+.nav-links {
+  display: flex;
+  gap: 40px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #000;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: #f19f18;
+}
+
+/* ==========================================================================
+   3. MENÚ DE USUARIO (Dropdown y Píldora)
+   ========================================================================== */
+.user-menu-container {
+  position: relative;
+  cursor: pointer;
+  z-index: 9999;
+}
+
+/* Botón con forma de píldora que muestra el nombre */
+.user-pill {
+  border: 3px solid #000;
+  padding: 10px 25px;
+  border-radius: 50px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  transition: transform 0.1s;
+}
+
+/* Cuadro desplegable al hacer clic */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border: 3px solid #000;
+  border-radius: 15px;
+  width: 220px;
+  box-shadow: 8px 8px 0px #000; /* Sombra neobrutalista sólida */
+  z-index: 10000 !important;
+  overflow: hidden;
+  padding: 5px;
+  display: block !important;
+}
+
+/* Botones y enlaces dentro del menú desplegable */
+.dropdown-menu button,
+.dropdown-menu a {
+  width: 100%;
+  padding: 12px 15px;
+  border: none;
+  background: none;
+  text-align: left;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  transition: background 0.2s;
+  text-decoration: none;
+  color: black;
+}
+
+/* ==========================================================================
+   4. CONTENEDOR DE PERFIL (Estructura y Márgenes)
+   ========================================================================== */
+/* Empuja el contenido hacia abajo para que no lo tape la Navbar */
+.perfil-content-container {
+  padding-top: 84px; 
+}
+
+/* Espaciado interno y alineación del contenido del perfil */
+.perfil-main-content {
+  padding-top: 140px; 
+  padding-left: 50px;
+  padding-right: 50px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Envoltura general de los datos del perfil */
+.perfil-wrapper {
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: 'Arial Black', sans-serif;
+}
+
+/* ==========================================================================
+   5. COMPONENTES ESPECÍFICOS DEL PERFIL
+   ========================================================================== */
+
+/* Botón Volver con efecto hover de movimiento */
+.btn-volver-texto {
+  display: block;
+  font-family: 'Arial Black', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 900;
+  text-decoration: none;
+  color: black;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-volver-texto:hover {
+  transform: translateX(-10px); /* Efecto de empuje a la izquierda */
+  color: #f19f18;
+}
+
+/* Línea decorativa debajo de "Volver" */
+.linea-amarilla {
+  border: none;
+  border-top: 4px solid #f19f18; 
+  width: 280px;
+  margin: 0 0 40px 0;
+  opacity: 1;
+}
+
+/* Bloque Superior: Avatar y Nombre */
+.header-perfil {
+  display: flex;
+  align-items: center;
+  border: 2px solid #f19f18; /* Borde naranja/amarillo */
+  padding: 30px;
+  gap: 40px;
+  margin-bottom: 40px;
+  background: #fff;
+}
+
+.circulo-avatar {
+  width: 150px;
+  height: 150px;
+  border: 2px solid black;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.nombre-usuario {
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin: 0 0 20px 0;
+}
+
+.btn-editar-perfil {
+background: white;
+  border: 3px solid black;
+  padding: 10px 30px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 900;
+  cursor: pointer;
+  font-size: 1rem;
+  position: relative;
+  transition: all 0.2s ease; /* Suaviza el movimiento */
+  outline: none;
+}
+
+.btn-editar-perfil:hover {
+/* Se mueve un poco hacia arriba y a la izquierda */
+  transform: translate(-4px, -4px);
+  /* Crea una sombra negra sólida hacia abajo y a la derecha */
+  box-shadow: 4px 4px 0px #000;
+  background-color: #f19f18;
+}
+
+.btn-editar-perfil:active {
+  /* Al hacer clic, vuelve a su posición original (efecto de pulsado) */
+  transform: translate(0px, 0px);
+  box-shadow: 0px 0px 0px #000;
+}
+
+/* Bloque Inferior: Tarjeta de datos personales */
+.info-personal-card {
+  border: 2px solid black;
+  width: 350px;
+  padding: 20px;
+  background: #fff;
+}
+
+.titulo-seccion {
+  font-size: 1.1rem;
+  font-weight: 900;
+  border-bottom: 2px solid black;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+/* Estilos para cada par de etiqueta-valor */
+.dato-item {
+  margin-bottom: 15px;
+}
+
+.dato-item label {
+  display: block;
+  color: #f19f18;
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+.dato-item span {
+  display: block;
+  font-size: 1rem;
+  font-weight: 900;
+  color: #000;
+}

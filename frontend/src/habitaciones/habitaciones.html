@@ -1,0 +1,53 @@
+<div class="scroll-container">
+  <header class="navbar">
+    <div class="logo">
+      <img src="LOGO.png" alt="Logo" />
+    </div>
+
+    <nav class="nav-links">
+      <a href="#inicio">INICIO</a>
+      <a (click)="scrollToSection('residencias')">RESIDENCIAS</a>
+      <a href="#">NOSOTROS</a>
+      <a (click)="scrollToSection('contacto')">CONTACTO</a>
+    </nav>
+
+    <div class="user-menu-container">
+      <div class="user-pill" (click)="toggleMenu($event)">
+        {{ nombreUsuario }}
+        <span class="arrow">{{ menuAbierto ? '▲' : '▼' }}</span>
+      </div>
+
+      <div class="dropdown-menu" *ngIf="menuAbierto">
+        <button (click)="irAPerfil($event)" class="menu-item">MI PERFIL</button>
+        <button (click)="menuAbierto = false">CONFIGURACIÓN</button>
+        <hr style="border: 1px solid black; width: 100%" />
+        <button (click)="cerrarSesion()" style="color: red">CERRAR SESIÓN</button>
+      </div>
+    </div>
+  </header>
+
+  <section id="inicio" class="section">
+    <div class="hero-content">
+      <h1 class="title-alquila">ALQUILA</h1>
+      <h1 class="title-habitaciones">HABITACIONES</h1>
+      <p class="description">Accede a viviendas compartidas mediante una gestión ágil.</p>
+    </div>
+    <div class="scroll-hint">
+      <span>DESLIZA</span>
+      <div class="arrow-down">↓</div>
+    </div>
+  </section>
+
+  <section id="residencias" class="section bg-black">
+    <h1 class="section-title">NUESTRAS RESIDENCIAS</h1>
+    <app-residencias></app-residencias>
+  </section>
+
+  <section id="nosotros" class="section">
+    <h1 class="section-title">SOBRE NOSOTROS</h1>
+  </section>
+
+  <section id="contacto" class="section bg-orange">
+    <h1 class="section-title">CONTACTO</h1>
+  </section>
+</div>

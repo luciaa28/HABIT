@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "titulo": "Residencia Centro Madrid",
+    "precio": 450,
+    "ubicacion": "Calle Mayor, Madrid",
+    "habitaciones": 5,
+    "imagen": "assets/habitacion1.jpg",
+    "wifi": true,
+    "limpieza": true
+  },
+  {
+    "id": 2,
+    "titulo": "Residencia Universitaria",
+    "precio": 380,
+    "ubicacion": "Av. Complutense, Madrid",
+    "habitaciones": 8,
+    "imagen": "assets/habitacion2.jpg",
+    "wifi": true,
+    "limpieza": false
+  }
+]

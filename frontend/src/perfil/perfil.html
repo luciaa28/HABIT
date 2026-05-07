@@ -1,0 +1,87 @@
+<div class="scroll-container">
+  
+  <header class="navbar">
+    <div class="logo">
+      <img src="LOGO.png" alt="Logo" />
+    </div>
+
+    <nav class="nav-links">
+      <a routerLink="/habitaciones">INICIO</a>
+      <a routerLink="/habitaciones">RESIDENCIAS</a> 
+      <a href="#">NOSOTROS</a>
+      <a href="#">CONTACTO</a> 
+    </nav>
+
+    <div class="user-menu-container">
+      <div class="user-pill" (click)="toggleMenu($event)">
+        {{ usuarioLogueado?.nombre || 'Usuario' }}
+        <span class="arrow">{{ menuAbierto ? '▲' : '▼' }}</span>
+      </div>
+
+      <div class="dropdown-menu" *ngIf="menuAbierto">
+        <a routerLink="/perfil" (click)="menuAbierto = false">MI PERFIL</a>
+        <button type="button">CONFIGURACIÓN</button>
+        <hr style="border: 1px solid black; width: 100%; margin: 5px 0;">
+        <button type="button" (click)="cerrarSesion()" style="color: red; font-weight: bold;">
+          CERRAR SESIÓN
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="perfil-content-container">
+    
+    <div class="perfil-wrapper" *ngIf="usuarioLogueado; else cargando">
+      
+      <a routerLink="/habitaciones" class="btn-volver-texto">VOLVER</a>
+      <hr class="linea-amarilla">
+
+      <div class="header-perfil">
+        <div class="circulo-avatar">
+           <span class="inicial">{{ usuarioLogueado.nombre?.charAt(0) }}</span>
+        </div>
+        <div class="header-info">
+          <h1 class="nombre-usuario">{{ usuarioLogueado.nombre | uppercase }}</h1>
+          <button class="btn-editar-perfil">EDITAR PERFIL</button>
+        </div>
+      </div>
+
+      <div class="info-personal-card">
+        <h2 class="titulo-seccion">INFORMACIÓN PERSONAL</h2>
+        
+        <div class="dato-item">
+          <label>NOMBRE COMPLETO</label>
+          <span>{{ usuarioLogueado.nombre }}</span>
+        </div>
+
+        <div class="dato-item">
+          <label>CORREO ELECTRÓNICO</label>
+          <span>{{ usuarioLogueado.email }}</span>
+        </div>
+
+        <div class="dato-item">
+          <label>TELÉFONO</label>
+          <span>{{ usuarioLogueado.telefono || 'No disponible' }}</span>
+        </div>
+
+        <div class="dato-item">
+          <label>UBICACIÓN</label>
+          <span>{{ usuarioLogueado.ubicacion || 'No disponible' }}</span>
+        </div>
+
+        <div class="dato-item">
+          <label>FECHA DE NACIMIENTO</label>
+          <span>{{ usuarioLogueado.fechaNacimiento || 'No disponible' }}</span>
+        </div>
+      </div>
+
+    </div>
+
+    <ng-template #cargando>
+      <div class="cargando-box">
+        <p>Buscando datos del usuario...</p>
+      </div>
+    </ng-template>
+
+  </main>
+</div>

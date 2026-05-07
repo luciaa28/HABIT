@@ -1,0 +1,26 @@
+<div class="residencias-grid">
+  <div class="residencia-card" *ngFor="let res of listaResidencias">
+    <div class="card-image">
+      <img [src]="res.imagen" [alt]="res.titulo">
+      <div class="badge-precio">{{ res.precio }}€<span>/mes</span></div>
+    </div>
+    
+    <div class="card-content">
+      <h3 class="residencia-titulo">{{ res.titulo | uppercase }}</h3>
+      
+      <div class="residencia-info">
+        <p><i class="fa-solid fa-location-dot"></i> {{ res.ubicacion }}</p>
+        <p><i class="fa-solid fa-bed"></i> {{ res.habitaciones }} Habitaciones</p>
+      </div>
+
+      <div class="residencia-tags">
+        <span class="tag" *ngIf="res.wifi">WIFI</span>
+        <span class="tag" *ngIf="res.limpieza">LIMPIEZA</span>
+      </div>
+
+      <button class="btn-detalles" (click)="verDetalles(res.id)">
+        VER DISPONIBILIDAD
+      </button>
+    </div>
+  </div>
+</div>
