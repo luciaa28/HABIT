@@ -1,0 +1,113 @@
+/* COLORES POR DEFECTO (MODO CLARO) */
+:root {
+  --fondo-principal: #ffffff;
+  --fondo-nav: #fac062;
+  --fondo-tarjetas: #ffffff;
+  --fondo-naranja: #ffe683; /* Naranja clarito para el banner */
+  --fondo-footer: #fbcb64;  /* Naranja suave para el footer */
+  --color-texto: #000000;
+  --borde-neobrutalista: #000000;
+  --color-detalles: #f19f18; 
+  --borde-caja-amarillo: #fde896;
+}
+
+/* COLORES CUANDO BODY TIENE .dark-mode */
+body.dark-mode {
+  --fondo-principal: #0f0f0f;
+  --fondo-nav: #333;
+  --fondo-tarjetas: #000000;
+  --fondo-naranja: #1a1a1a; /* Gris oscuro para el banner */
+  --fondo-footer: #1a1a1a;  /* Gris oscuro para el footer */
+  --color-texto: #ffffff;
+  --borde-neobrutalista: #ffffff;
+  --borde-caja-amarillo: #f19f18;
+}
+
+/* Corrección para el User Pill en modo oscuro */
+body.dark-mode .user-pill {
+  /* Aquí le pones el gris claro que prefieras */
+  background-color: #d1d1d1 !important; 
+  /* El borde lo dejamos en negro o el color de texto para que se vea neobrutalista */
+  border-color: #000000 !important; 
+}
+
+/* Para que el texto dentro del pill se vea bien sobre ese gris claro */
+body.dark-mode .user-pill .user-name-text {
+  color: #000000 !important; /* Texto negro sobre fondo gris claro */
+}
+
+/* Mantenemos el email en naranja porque queda genial */
+body.dark-mode .user-pill .user-email-text {
+  color: #f19f18 !important;
+}
+
+/* La flechita también en negro para que combine con el nombre */
+body.dark-mode .user-pill .arrow {
+  color: #000000 !important;
+}
+
+/* APLICACIÓN GLOBAL */
+body {
+  background-color: var(--fondo-principal) !important;
+  color: var(--color-texto) !important;
+  transition: all 0.3s ease;
+}
+
+h1 {
+  color: var(--color-detalles);
+  font-size: 25px;
+  font-weight: 900;
+  margin: 0;
+  line-height: 0.9;
+}
+
+.navbar {
+  z-index: 99999 !important;
+  position: fixed !important;
+  pointer-events: auto !important;
+  /* CAMBIO: Ahora usa var(--fondo-nav) para que sea gris en oscuro */
+  background-color: var(--fondo-nav) !important;
+}
+
+.user-menu-container {
+  z-index: 100000 !important;
+  position: relative;
+  color: var(--color-texto);
+}
+
+.dropdown-menu {
+  display: block !important;
+  z-index: 100001 !important;
+  pointer-events: all !important;
+  background-color: var(--fondo-tarjetas) !important;
+  border: 2px solid var(--borde-neobrutalista) !important;
+  box-shadow: 6px 6px 0px var(--borde-neobrutalista) !important;
+}
+
+.menu-item {
+  position: relative;
+  z-index: 100002 !important;
+  cursor: pointer !important;
+  color: var(--color-texto) !important; /* Aquí forzamos que sea blanco en modo oscuro */
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+}
+
+/* PARCHE ESPECÍFICO PARA CERRAR SESIÓN */
+.logout-btn {
+  color: var(--color-texto) !important;
+}
+
+.menu-item:hover, .logout-btn:hover {
+  background-color: var(--borde-caja-amarillo) !important;
+  color: #000 !important; 
+}
+
+/* Para los divisores del menú */
+.divider {
+  background-color: var(--borde-neobrutalista) !important;
+  height: 2px;
+  margin: 5px 0;
+}

@@ -1,0 +1,65 @@
+<div class="login-wrapper">
+  <div class="logo-container">
+    <img src="LOGO.png" class="logo" alt="Logo" />
+  </div>
+
+  <div class="form-card">
+    <div class="form-tabs">
+      <h1 class="tab-btn" (click)="irALogin()">INICIAR SESION</h1>
+      <h1 class="tab-btn active">REGISTRARSE</h1>
+    </div>
+
+    <form (submit)="$event.preventDefault(); enviarRegistro()">
+      <div class="form-group">
+        <h2>NOMBRE COMPLETO *</h2>
+        <input type="text" [(ngModel)]="nuevoUsuario.nombre" name="nombre" required placeholder="Introduzca su nombre:"/>
+      </div>
+
+      <div class="form-group">
+        <h2>TELEFONO</h2>
+        <input type="text" [(ngModel)]="nuevoUsuario.telefono" name="telefono"  placeholder="Introduzca su numero de telefono:"/>
+      </div>
+
+      <div class="form-group">
+        <h2>FECHA DE NACIMIENTO </h2>
+        <input type="date" [(ngModel)]="nuevoUsuario.fechaNacimiento" name="fechaNacimiento" class="input-calendario"  />
+      </div>
+
+      <div class="form-group">
+        <h2>CORREO ELECTRONICO *</h2>
+        <input type="email" [(ngModel)]="nuevoUsuario.email" name="email" required placeholder="Introduzca su email:"/>
+      </div>
+
+      <div class="form-group">
+        <h2>CONTRASEÑA *</h2>
+        <div class="password-wrapper">
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            [(ngModel)]="nuevoUsuario.password"
+            name="password"
+            required
+            placeholder="Introduzca su contraseña:"
+          />
+          <button type="button" class="toggle-password" (click)="showPassword = !showPassword">
+            <i [class]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <h2>REPETIR CONTRASEÑA *</h2>
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          [(ngModel)]="confirmarPass"
+          name="confirmarPass"
+          required
+          placeholder="Repita su contraseña:"
+        />
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="btn-acceder">CREAR CUENTA</button>
+      </div>
+    </form>
+  </div>
+</div>

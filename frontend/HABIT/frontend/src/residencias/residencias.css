@@ -1,0 +1,837 @@
+/* ==========================================================================
+   1. IMPORTACIÓN DE FUENTES Y CONFIGURACIÓN GLOBAL
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700;900&display=swap');
+
+:host {
+  display: block;
+}
+
+.scroll-container {
+  height: 100vh;
+  overflow: visible !important;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  font-family: 'Josefin Sans', sans-serif;
+  background-color: var(--fondo-principal); /* Usará tu gris claro en Dark Mode */
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================================================
+   2. NAVBAR / BARRA DE NAVEGACIÓN
+   ========================================================================== */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 40px;
+  background: var(--fondo-nav) !important; /* Gris oscuro en Dark Mode */
+  z-index: 1000;
+  box-sizing: border-box;
+  overflow: visible !important;
+}
+
+/* Logo */
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.4rem;
+  font-weight: 900;
+}
+
+.logo img {
+  height: 45px;
+}
+
+/* Links navegación */
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--color-texto);
+  font-weight: 700;
+  font-size: 12px;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--color-detalles);
+}
+
+/* ==========================================================================
+   3. HERO / PORTADA PRINCIPAL
+   ========================================================================== */
+
+.hero-full {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 8%;
+  background-color: white;
+  position: relative;
+  z-index: 1;
+}
+
+.title-alquila {
+  color: #f19f18;
+  font-size: 5.5rem;
+  font-weight: 900;
+  margin: 0;
+  line-height: 0.9;
+}
+
+.title-habitaciones {
+  color: #000;
+  font-size: 5.5rem;
+  font-weight: 900;
+  margin: 0;
+  line-height: 0.9;
+}
+
+.description {
+  margin-top: 20px;
+  font-size: 1.1rem;
+  max-width: 450px;
+  color: #333;
+  font-weight: 700;
+}
+
+/* Indicador scroll */
+
+.scroll-hint {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-weight: 900;
+  font-size: 0.9rem;
+}
+
+.arrow-down {
+  font-size: 2rem;
+  margin-top: -5px;
+}
+
+/* ==========================================================================
+   4. CONFIGURACIÓN GENERAL DE SECCIONES
+   ========================================================================== */
+
+.section {
+  height: 100vh;
+  width: 100%;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 60px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.section-title {
+  font-size: 4rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+/* Fondos */
+
+.bg-black {
+  background-color: #000;
+  color: #fff;
+}
+
+.bg-orange {
+  background-color: #f19f18;
+  color: #000;
+}
+
+/* ==========================================================================
+   5. SECCIÓN EMPRESA
+   ========================================================================== */
+
+.empresa-section {
+  min-height: 100vh;
+  padding: 80px 8%;
+  background-color: #fdfdfd;
+  border-top: 3px solid black;
+  position: relative;
+  z-index: 2;
+}
+
+/* ==========================================================================
+   6. MENÚ DE USUARIO Y DROPDOWN
+   ========================================================================== */
+
+.user-menu-container {
+  position: relative;
+  cursor: pointer;
+  overflow: visible !important;
+  z-index: 9999;
+}
+
+/* Botón usuario */
+
+.user-pill {
+  border: 2px solid var(--borde-neobrutalista);
+  padding: 4px 14px;
+  border-radius: 50px;
+  font-weight: 900;
+  min-width: fit-content;
+  background-color: var(--fondo-principal);
+  transition: transform 0.1s;
+  cursor: pointer;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-texto);
+}
+
+.user-pill:active {
+  transform: scale(0.95);
+}
+
+.arrow {
+  font-size: 0.6rem;
+}
+
+/* Información usuario */
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  line-height: 1.1;
+}
+
+.user-name-text {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 900;
+  font-size: 13px;
+  color: var(--color-texto) !important;
+}
+
+.user-email-text {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 900;
+  font-size: 10px;
+  color: #f19f18;
+}
+
+/* Avatar */
+
+.avatar-container {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid black;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.profile-pic {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Dropdown */
+
+.dropdown-menu {
+  background: var(--fondo-tarjetas) !important;
+  color: var(--color-texto);
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background: white;
+  border: 2px solid var(--borde-neobrutalista) !important;
+  border-radius: 12px;
+  width: 190px;
+  box-shadow: 6px 6px 0px var(--borde-neobrutalista) !important;
+  z-index: 10000 !important;
+  overflow: hidden;
+  padding: 4px;
+  display: block !important;
+}
+
+.dropdown-menu button,
+.dropdown-menu a {
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  background: none;
+  text-align: left;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 6px;
+  transition: background 0.2s;
+  text-decoration: none;
+  color: #000;
+}
+
+.dropdown-menu button:hover,
+.dropdown-menu a:hover {
+  background: #f1f1f1;
+}
+
+.divider {
+  height: 2px;
+  background: #000;
+  margin: 4px 0;
+}
+
+.logout-btn:hover {
+  background: #ff4444 !important;
+  color: white;
+}
+
+/* ==========================================================================
+   7. CONTENEDOR PRINCIPAL RESIDENCIAS
+   ========================================================================== */
+
+.residencias-main {
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 40px;
+  min-height: 100vh;
+}
+
+.titulo-bienvenida {
+  margin-bottom: 25px;
+  padding: 0 20px;
+  position: relative;
+}
+
+/* ==========================================================================
+   8. FILTROS Y BÚSQUEDA
+   ========================================================================== */
+
+.search-filter-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--fondo-tarjetas); /* Blanco en ambos modos o gris suave */
+  padding: 16px 22px;
+  border: 2px solid var(--color-detalles);
+  border-radius: 18px;
+
+  margin-top: 90px;
+  margin-bottom: 15px;
+
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+/* Inputs filtros */
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.filter-group label {
+  font-weight: 900;
+  font-size: 0.7rem;
+  margin-bottom: 6px;
+  color: var(--color-texto);
+}
+
+.filter-group input {
+  border: 2px solid var(--color-detalles);
+  background: var(--fondo-principal);
+  color: var(--color-texto);
+  border-radius: 8px;
+  padding: 8px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 700;
+  outline: none;
+  font-size: 0.85rem;
+}
+
+/* Botón buscar */
+
+.btn-buscar {
+  background: var(--borde-caja-amarillo);
+  border: 2px solid var(--borde-neobrutalista);
+  color: #000; /* Siempre negro para legibilidad sobre amarillo */
+  padding: 10px 22px;
+  border-radius: 12px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: 0.2s;
+  height: fit-content;
+  font-size: 0.85rem;
+}
+
+.btn-buscar:hover {
+  background: #f19f18;
+  transform: translate(-2px, -2px);
+  box-shadow: 3px 3px 0px #000;
+}
+
+/* ==========================================================================
+   9. GRID DE TARJETAS RESIDENCIAS
+   ========================================================================== */
+
+.residencias-grid-dos-columnas {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+  .residencias-grid-dos-columnas {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tarjeta */
+
+.residencia-card {
+  background: var(--fondo-tarjetas); /* Cambiado de #fff */
+  border-radius: 24px;
+  overflow: hidden;
+  border: 2px solid var(--borde-neobrutalista); /* Cambiado de #eaeaea */
+  box-shadow: 6px 6px 0px var(--borde-neobrutalista);
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 6px 6px 0px var(--borde-neobrutalista); /* Estilo neobrutalista real */
+}
+
+.residencia-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* ==========================================================================
+   10. IMAGEN TARJETA
+   ========================================================================== */
+
+/* Imagen residencia */
+
+.residencia-img-container {
+  height: 260px;
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 0px;
+}
+
+.residencia-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-image {
+  position: relative;
+  height: 180px;
+  border-bottom: 3px solid #000;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Precio flotante */
+
+.badge-precio {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: #f19f18;
+  color: #000;
+  padding: 6px 12px;
+  border: 2px solid #000;
+  border-radius: 8px;
+  font-weight: 900;
+  font-size: 1rem;
+}
+
+.badge-precio span {
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   11. CONTENIDO TARJETA
+   ========================================================================== */
+
+.card-content {
+  padding: 16px;
+}
+
+.residencia-titulo {
+  font-size: 1.1rem;
+  font-weight: 900;
+  margin-bottom: 10px;
+  color: var(--color-texto); /* Cambiado de #000 */
+}
+
+/* Información */
+
+.residencia-info {
+  margin-bottom: 15px;
+}
+
+.residencia-info p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0;
+  font-weight: 500;
+  color: var(--color-texto); /* Cambiado de #333 */
+  font-size: 20px;
+}
+
+.residencia-info i {
+  color: #f19f18;
+  width: 18px;
+}
+
+/* ==========================================================================
+   12. TAGS / ETIQUETAS
+   ========================================================================== */
+
+.residencia-tags {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: var(--fondo-principal); /* Antes #f0f0f0 */
+  border: 2px solid var(--borde-neobrutalista);
+  color: var(--color-texto);
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-size: 0.6rem;
+  font-weight: 800;
+}
+
+/* ==========================================================================
+   13. BOTÓN DETALLES
+   ========================================================================== */
+
+.btn-detalles {
+  width: 100%;
+  padding: 10px;
+  background: #000;
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 8px;
+  font-weight: 900;
+  font-family: 'Josefin Sans', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.85rem;
+}
+
+.btn-detalles:hover {
+  background: #f19f18;
+  color: #000;
+}
+
+/* ==========================================================================
+   14. COLECCIÓN DE RESIDENCIAS
+   ========================================================================== */
+
+/* --- CONTENEDOR Y GRID --- */
+.coleccion-residencias {
+  padding: 15px 8%; /* Más espacio superior para respirar */
+  background-color: var(--fondo-principal);
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.residencias-grid-tres-columnas {
+  display: grid;
+  /* Forzamos 3 columnas exactas en escritorio */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px; /* Espaciado entre tarjetas */
+  margin-bottom: 60px;
+}
+
+/* --- TARJETA --- */
+.residencia-card-v2 {
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  /* Aseguramos que la tarjeta no se estire más de lo necesario */
+  width: 100%;
+}
+
+/* Imagen estilo vertical alta */
+.card-img-v2 {
+  width: 100%;
+  height: 450px; /* Altura similar a la foto que pasaste */
+  overflow: hidden;
+  margin-bottom: 20px;
+  border-radius: 4px; /* Un borde muy suave opcional */
+}
+
+.card-img-v2 img {
+  width: 100%;
+  height: 100%;
+  /* Esto recorta la imagen para que llene el contenedor sin deformarse */
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.residencia-card-v2:hover .card-img-v2 img {
+  transform: scale(1.05);
+}
+
+/* --- TEXTOS --- */
+.card-body-v2 {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 5px; /* Pequeño padding lateral para el texto */
+}
+
+.res-title-v2 {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--color-texto);
+  margin: 0;
+}
+
+.res-location-v2 {
+  color: var(--color-detalles); /* Tu naranja */
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.res-meta-v2 {
+  display: flex;
+  gap: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  opacity: 0.6;
+  color: var(--color-texto);
+}
+
+/* --- FOOTER DE LA TARJETA --- */
+.card-footer-v2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(128, 128, 128, 0.2);
+}
+
+.price-amount {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--color-texto);
+}
+
+.price-period {
+  font-size: 0.8rem;
+  opacity: 0.5;
+  margin-left: 5px;
+}
+
+.btn-ver-mas {
+  font-size: 0.8rem;
+  font-weight: 900;
+  color: var(--color-detalles);
+  text-decoration: none;
+  letter-spacing: 1px;
+}
+
+/* --- ESTILO PAGINACIÓN --- */
+.paginacion-controles {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+/* Personalización rápida de los controles para que peguen con tu diseño */
+::ng-deep .ngx-pagination .current {
+  background: var(--color-detalles) !important;
+  border-radius: 4px;
+}
+
+::ng-deep .ngx-pagination a:hover {
+  background: var(--fondo-naranja) !important;
+  color: #000 !important;
+}
+
+/* ==========================================================================
+   15. PAGINACIÓN
+   ========================================================================== */
+
+.paginacion-controles {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Librería ngx-pagination */
+
+.ngx-pagination .current {
+  background: #f19f18 !important;
+  border: 2px solid #000;
+  border-radius: 5px;
+}
+
+.ngx-pagination a:hover {
+  background: #fde896 !important;
+}
+
+/* ==========================================================================
+   9.FOOTER
+   ========================================================================== */
+
+.footer-simple {
+  padding: 50px 10% 40px;
+  background-color: var(--fondo-footer) !important;
+  color: var(--color-texto) !important;
+}
+
+.footer-inner {
+  display: grid;
+  /* El primer bloque es más ancho, los otros dos son iguales */
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 80px;
+  margin-bottom: 60px;
+}
+
+/* --- BLOQUE IZQUIERDO --- */
+.f-main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.f-logo-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.f-logo-box img {
+  height: 45px;
+  filter: none !important;
+}
+.f-brand-name {
+  font-weight: 900;
+  letter-spacing: 1px;
+  font-size: 1.1rem;
+}
+
+.f-bio {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  max-width: 380px;
+  opacity: 0.8;
+}
+
+.f-socials {
+  display: flex;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.f-socials a {
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  font-weight: 900;
+  opacity: 0.5;
+}
+
+/* --- BLOQUES DE NAVEGACIÓN --- */
+.f-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.f-group h4 {
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+  color: var(--color-texto);
+}
+
+.f-group a {
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: var(--color-texto) !important;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.f-group a:hover {
+  opacity: 1;
+}
+
+/* --- BARRA INFERIOR --- */
+.f-bottom-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 30px;
+  border-top: 1px solid rgba(128, 128, 128, 0.1);
+}
+
+.f-bottom-bar small {
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  opacity: 0.5;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 900px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .f-bottom-bar {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+}

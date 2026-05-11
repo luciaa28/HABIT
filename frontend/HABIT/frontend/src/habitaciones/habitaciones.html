@@ -1,8 +1,7 @@
-
 <div class="scroll-container">
   <header class="navbar">
     <div class="logo">
-      <img src="LOGO.png" alt="Logo" />
+      <img src="LOGO.png" alt="Logo Gemini" />
     </div>
 
     <nav class="nav-links">
@@ -35,7 +34,6 @@
           routerLink="/configuracion"
           (click)="menuAbierto = false"
           class="menu-item"
-          style="z-index: 100005; position: relative"
         >
           CONFIGURACIÓN
         </button>
@@ -45,77 +43,64 @@
     </div>
   </header>
 
-  <div class="search-filter-container">
-    <div class="filter-group">
-      <label>UBICACION</label>
-      <input type="text" [(ngModel)]="filtroUbicacion" placeholder="Ej: Bilbao" />
-    </div>
-
-    <div class="filter-group">
-      <label>PRECIO MIN</label>
-      <input type="number" [(ngModel)]="filtroPrecioMin" placeholder="0" />
-    </div>
-
-    <div class="filter-group">
-      <label>PRECIO MAX</label>
-      <input type="number" [(ngModel)]="filtroPrecioMax" placeholder="1000" />
-    </div>
-
-    <div class="filter-group">
-      <label>PERSONAS</label>
-      <input type="number" [(ngModel)]="filtroPersonas" placeholder="1" />
-    </div>
-
-    <button class="btn-buscar" (click)="aplicarFiltros()">BUSCAR</button>
-  </div>
-
-  <div class="coleccion-residencias">
-  <div class="coleccion-header">
-    <h1 class="coleccion-titulo">COLECCIÓN ACTUAL</h1>
-    <br>
-    <div class="underline"></div>
-  </div>
-
-  <div class="residencias-grid-tres-columnas">
-    <article 
-      class="residencia-card-v2" 
-      *ngFor="let res of listaResidencias | paginate: { itemsPerPage: 6, currentPage: p }"
-    >
-      <div class="card-img-v2">
-        <img [src]=" 'fotosHabitaciones/' + res.imagen" [alt]="res.titulo" />
-      </div>
-
-      <div class="card-body-v2">
-        <h3 class="res-title-v2">{{ res.titulo }}</h3>
-        
-        <div class="res-location-v2">
-          <span class="icon-orange">📍</span> {{ res.ubicacion }}
-        </div>
-        
-        <div class="res-meta-v2">
-          <span>👥 {{ res.residentes }}</span>
-          <span>🕒 Disponible</span>
-        </div>
-
-        <div class="card-footer-v2">
-          <div class="res-price-v2">
-            <span class="price-amount">{{ res.precio }}€</span>
-            <span class="price-period">/mes</span>
+  <main class="main-content">
+    <div *ngIf="seccionActual === 'inicio'">
+      <section class="hero-full">
+        <div class="hero-content">
+          <div class="hero-text-side">
+            <h1 class="title-alquila">ALQUILA</h1>
+            <h1 class="title-habitaciones">HABITACIONES</h1>
+            <p class="description">
+              Accede a viviendas compartidas mediante una gestión ágil y digital.
+            </p>
           </div>
-          <a class="btn-ver-mas" [routerLink]="['/residencia', res.id]">
-            VER MÁS →
-          </a>
-        </div>
-      </div>
-    </article>
-  </div>
 
-  <div class="paginacion-controles">
-    <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente">
-    </pagination-controls>
-  </div>
-</div>
-  <footer class="footer-simple">
+          <div class="scroll-hint" (click)="scrollToSection('info-empresa')">
+            <span class="scroll-text">DESLIZA</span>
+            <div class="arrow-down">▼</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats-banner">
+        <div class="stat-item">
+          <span class="stat-number">150+</span>
+          <span class="stat-label">RESIDENCIAS</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">1.5K+</span>
+          <span class="stat-label">MIEMBROS</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">94%</span>
+          <span class="stat-label">SATISFACCIÓN</span>
+        </div>
+      </section>
+
+      <section id="info-empresa" class="nosotros-section">
+        <h2 class="section-title">¿POR QUÉ NOSOTROS?</h2>
+        <div class="nosotros-grid">
+          <article class="nosotros-item">
+            <div class="icon-box">🛡️</div>
+            <h3>SEGURIDAD GARANTIZADA</h3>
+            <p>Procesos de verificación rigurosos para tu total tranquilidad.</p>
+          </article>
+
+          <article class="nosotros-item">
+            <div class="icon-box">⭐</div>
+            <h3>ALTA CALIDAD</h3>
+            <p>Espacios seleccionados con diseño contemporáneo y moderno.</p>
+          </article>
+
+          <article class="nosotros-item">
+            <div class="icon-box">👥</div>
+            <h3>COMUNIDAD EXCLUSIVA</h3>
+            <p>Conecta con personas que comparten tu estilo de vida.</p>
+          </article>
+        </div>
+      </section>
+
+      <footer class="footer-simple">
         <div class="footer-inner">
           <section class="f-main">
             <div class="f-logo-box">
@@ -150,5 +135,6 @@
           <small>© 2026 Habit. TODOS LOS DERECHOS RESERVADOS.</small>
         </div>
       </footer>
+    </div>
+  </main>
 </div>
-

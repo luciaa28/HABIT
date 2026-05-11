@@ -4,54 +4,45 @@ import { HttpClient } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { API_URL } from '../app/ApplicationConstants/constants';
 
 @Component({
   selector: 'app-residencias',
   standalone: true,
-  imports: [CommonModule, FormsModule,NgxPaginationModule, RouterModule],
+  imports: [CommonModule, FormsModule, NgxPaginationModule, RouterModule],
   templateUrl: './residencias.html',
   styleUrl: './residencias.css',
 })
 export class Residencias implements OnInit {
- API_URL = API_URL;
   private router = inject(Router);
   private location = inject(PlatformLocation);
   private http = inject(HttpClient);
-
+  /// VARIABLES CRÍTICAS PARA EL USUARIO
   usuarioLogueado: any = null;
   menuAbierto: boolean = false;
   nombreUsuario: string = 'USUARIO';
-
+  // VARIABLES DE NAVEGACIÓN
   seccionActual: 'inicio' | 'residencias' = 'inicio';
-
+  // VARIABLES PARA LOS FILTROS
   filtroUbicacion: string = '';
   filtroPrecioMin: number | null = null;
   filtroPrecioMax: number | null = null;
   filtroPersonas: number | null = null;
-
+  //VARIABLE PARA PAGINACION
   p: number = 1;
 
-  listaResidencias: any[] = [];
-  listaFiltrada: any[] = [];
+  listaResidencias: any[] = []; // Datos originales del JSON
+  listaFiltrada: any[] = []; // Datos que se muestran
 
   ngOnInit() {
-    this.cargarUsuario();
+    this.cargarUsuario(); // ¡Importante para que salga tu nombre arriba!
     this.cargarResidencias();
-  }
-
-  // 🔥 AHORA DESDE API
-  cargarResidencias() {
-    this.http.get<any[]>(`${API_URL}/residencias`).subscribe({
+    this.http.get<any[]>('/residencias.json').subscribe({
       next: (data) => {
-        console.log(data);
         this.listaResidencias = data;
         this.listaFiltrada = data;
-        console.log('Residencias desde API:', data);
+        console.log('Datos en el componente:', this.listaResidencias);
       },
-      error: (err) => {
-        console.error('Error al cargar API:', err);
-      },
+      error: (err) => console.error('Error al cargar JSON:', err),
     });
   }
 
@@ -60,11 +51,26 @@ export class Residencias implements OnInit {
       const cumpleUbicacion = res.ubicacion
         .toLowerCase()
         .includes(this.filtroUbicacion.toLowerCase());
-
       const cumpleMin = this.filtroPrecioMin ? res.precio >= this.filtroPrecioMin : true;
       const cumpleMax = this.filtroPrecioMax ? res.precio <= this.filtroPrecioMax : true;
+      const cumplePersonas = this.filtroPersonas
+        ? res.companeros.includes(this.filtroPersonas.toString())
+        : true;
 
-      return cumpleUbicacion && cumpleMin && cumpleMax;
+      return cumpleUbicacion && cumpleMin && cumpleMax && cumplePersonas;
+    });
+  }
+
+  cargarResidencias() {
+    // Leemos el archivo JSON desde la carpeta assets
+    this.http.get<any[]>('residencias.json').subscribe({
+      next: (data) => {
+        this.listaResidencias = data;
+        console.log('Residencias cargadas:', data);
+      },
+      error: (err) => {
+        console.error('Error al cargar el JSON:', err);
+      },
     });
   }
 
@@ -73,10 +79,12 @@ export class Residencias implements OnInit {
   }
 
   scrollToSection(sectionId: string) {
+    // Si estamos en la pestaña de residencias, primero volvemos a inicio
     if (this.seccionActual !== 'inicio') {
       this.seccionActual = 'inicio';
     }
 
+    // Esperamos un momento a que Angular renderice la sección de inicio antes de bajar
     setTimeout(() => {
       const element = document.getElementById(sectionId);
       if (element) {
@@ -85,10 +93,17 @@ export class Residencias implements OnInit {
     }, 100);
   }
 
+  // --- LÓGICA DE USUARIO Y SESIÓN ---
+
   cargarUsuario() {
     const identificador = localStorage.getItem('usuario_email');
-    if (!identificador) return;
 
+    if (!identificador) {
+      console.warn('No hay ningún email en localStorage');
+      return;
+    }
+
+    // Buscamos el usuario en nuestro archivo JSON
     this.http.get<any>('usuarios.json').subscribe({
       next: (response) => {
         const usuarioEncontrado = response.usuarios.find(
@@ -99,9 +114,12 @@ export class Residencias implements OnInit {
 
         if (usuarioEncontrado) {
           this.usuarioLogueado = usuarioEncontrado;
-          this.nombreUsuario = usuarioEncontrado.nombre.toUpperCase();
+          // Actualizamos el nombre para mostrar en el menú (sin el @dominio)
+          this.nombreUsuario = this.usuarioLogueado.nombre.toUpperCase();
+          console.log('✅ Usuario cargado:', this.usuarioLogueado.nombre);
         }
       },
+      error: (err) => console.error('Error al cargar usuarios.json', err),
     });
   }
 
@@ -113,9 +131,12 @@ export class Residencias implements OnInit {
   }
 
   cerrarSesion() {
-    localStorage.clear();
+    localStorage.removeItem('sesion_activa');
+    localStorage.removeItem('usuario_email');
     this.router.navigateByUrl('/login');
   }
+
+  // --- LÓGICA DEL MENÚ ---
 
   toggleMenu(event: Event) {
     event.stopPropagation();

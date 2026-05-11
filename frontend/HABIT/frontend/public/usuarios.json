@@ -1,0 +1,68 @@
+{
+  "usuarios": [
+    {
+      "id": "1",
+      "username": "adminLucia",
+      "password": "123",
+      "role": "admin",
+      "email": "adminLucia@gmail.com",
+      "nombre": "Lucia Marcos",
+      "telefono": "+34 600 123 456",
+      "ubicacion": "C. Langileria, 48940 La Chopera, Vizcaya",
+      "fechaNacimiento": "28 de Diciembre de 2005",
+      "imagen": "fotosUsuarios/adminLucia.png"
+
+    },
+        {
+      "id": "2",
+      "username": "adminEkaitz",
+      "password": "123",
+      "role": "admin",
+      "email": "adminEkaitz@gmail.com",
+      "nombre": "Ekaitz Ibanez",
+      "telefono": "+34 600 123 456",
+      "ubicacion": "Ramón y Cajal Kalea, 6, 48910 Sestao, Vizcaya",
+      "fechaNacimiento": "",
+      "imagen": "fotosUsuarios/adminEkaitz.png"
+    },
+        {
+      "id": "3",
+      "username": "adminStanis",
+      "password": "123",
+      "role": "admin",
+      "email": "adminStanis@gmail.com",
+      "nombre": "Stanislav Suba",
+      "telefono": "+34 600 123 456",
+      "ubicacion": "C. de Cataluña, 1, Deusto, 48015 Bilbao, Vizcaya",
+      "fechaNacimiento": "",
+      "imagen": "fotosUsuarios/adminStanis.jpg"
+
+    },
+    {
+      "id": "4",
+      "username": "usuario1",
+      "password": "123",
+      "role": "usuario",
+      "email": "usuario1@gmail.com",
+      "nombre": "Usuario1",
+      "telefono": "+34 600 123 456",
+      "ubicacion": "",
+      "fechaNacimiento": "",
+      "imagen": "fotosUsuarios/iconoUsuario.png"
+
+    },
+    {
+      "id": "5",
+      "username": "usuario2",
+      "password": "123",
+      "role": "usuario",
+      "email": "usuario2@gmail.com",
+      "nombre": "Usuario2",
+      "telefono": "+34 600 123 456",
+      "ubicacion": "",
+      "fechaNacimiento": "",
+      "imagen": "fotosUsuarios/iconoUsuario.png"
+
+    }
+  ]
+}

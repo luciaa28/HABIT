@@ -1,4 +1,3 @@
-
 <div class="scroll-container">
   <header class="navbar">
     <div class="logo">
@@ -82,7 +81,7 @@
       *ngFor="let res of listaResidencias | paginate: { itemsPerPage: 6, currentPage: p }"
     >
       <div class="card-img-v2">
-        <img [src]=" 'fotosHabitaciones/' + res.imagen" [alt]="res.titulo" />
+        <img [src]="res.imagen" [alt]="res.titulo" />
       </div>
 
       <div class="card-body-v2">
@@ -151,4 +150,3 @@
         </div>
       </footer>
 </div>
-

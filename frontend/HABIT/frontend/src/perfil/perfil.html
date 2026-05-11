@@ -1,0 +1,159 @@
+<div class="scroll-container">
+  <header class="navbar">
+    <div class="logo">
+      <img src="LOGO.png" alt="Logo" />
+    </div>
+
+    <nav class="nav-links">
+      <a routerLink="/habitaciones">INICIO</a>
+      <a routerLink="/residencias">RESIDENCIAS</a>
+      <a href="#">NOSOTROS</a>
+      <a href="#">CONTACTO</a>
+    </nav>
+
+    <div class="user-menu-container">
+      <div class="user-pill" (click)="toggleMenu($event)">
+        <div class="avatar-container">
+          <img
+            [src]="usuarioLogueado?.imagen || 'fotosUsuarios/iconoUsuario.png'"
+            alt="Perfil"
+            class="profile-pic"
+          />
+        </div>
+        <div class="user-info">
+          <span class="user-name-text">
+            {{ usuarioLogueado ? usuarioLogueado.nombre : 'Cargando...' }}
+          </span>
+          <span class="user-email-text">
+            {{ usuarioLogueado ? usuarioLogueado.email : 'Cargando...' }}
+          </span>
+        </div>
+        <span class="arrow">{{ menuAbierto ? '▲' : '▼' }}</span>
+      </div>
+
+      <div class="dropdown-menu" *ngIf="menuAbierto">
+        <button (click)="irAPerfil($event)" class="menu-item">MI PERFIL</button>
+        <button
+          type="button"
+          routerLink="/configuracion"
+          (click)="menuAbierto = false"
+          class="menu-item"
+          style="z-index: 100005; position: relative"
+        >
+          CONFIGURACIÓN
+        </button>
+        <div class="divider"></div>
+        <button (click)="cerrarSesion()" class="logout-btn">CERRAR SESIÓN</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="perfil-content-container">
+    <div class="perfil-wrapper" *ngIf="usuarioLogueado; else cargando">
+      <a routerLink="/habitaciones" class="btn-volver-texto">VOLVER</a>
+      <hr class="linea-amarilla" />
+      <h1 class="titulo-config">MI PERFIL</h1>
+      <br />
+
+      <div class="header-perfil">
+        <div class="circulo-avatar">
+          <img
+            [src]="usuarioLogueado.imagen || 'fotosUsuarios/iconoUsuario.png'"
+            alt="Foto de perfil"
+            class="profile-pic-grande"
+          />
+        </div>
+        <div class="header-info">
+          <h1 class="nombre-usuario">{{ usuarioLogueado.nombre | uppercase }}</h1>
+          <br />
+          <button class="btn-editar-perfil">EDITAR PERFIL</button>
+        </div>
+      </div>
+
+      <div class="perfil-layout">
+        <!-- IZQUIERDA: INFO -->
+        <div class="info-personal-card">
+          <h2 class="titulo-seccion">INFORMACIÓN PERSONAL</h2>
+
+          <div class="dato-item">
+            <label>NOMBRE COMPLETO:</label>
+            <span>{{ usuarioLogueado.nombre }}</span>
+          </div>
+
+          <div class="dato-item">
+            <label>CORREO ELECTRÓNICO:</label>
+            <span>{{ usuarioLogueado.email }}</span>
+          </div>
+
+          <div class="dato-item">
+            <label>TELÉFONO:</label>
+            <span>{{ usuarioLogueado.telefono || 'No disponible' }}</span>
+          </div>
+
+          <div class="dato-item">
+            <label>UBICACIÓN:</label>
+            <span>{{ usuarioLogueado.ubicacion || 'No disponible' }}</span>
+          </div>
+
+          <div class="dato-item">
+            <label>FECHA DE NACIMIENTO:</label>
+            <span>{{ usuarioLogueado.fechaNacimiento || 'No disponible' }}</span>
+          </div>
+        </div>
+        <!-- DERECHA: MAPA -->
+        <div class="mapa-container">
+          <iframe
+            width="100%"
+            height="100%"
+            style="border: 0"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+            [src]="mapUrl"
+          >
+          </iframe>
+        </div>
+      </div>
+    </div>
+    <ng-template #cargando>
+      <div class="cargando-box">
+        <p>Buscando datos del usuario...</p>
+      </div>
+    </ng-template>
+     <footer class="footer-simple">
+        <div class="footer-inner">
+          <section class="f-main">
+            <div class="f-logo-box">
+              <img src="LOGO.png" alt="Logo" />
+            </div>
+            <p class="f-bio">
+              Revolucionando el alojamiento universitario en el País Vasco. <br />Cada espacio es
+              una declaración de estilo y comodidad.
+            </p>
+            <div class="f-socials">
+              <a href="#">INSTAGRAM</a>
+              <a href="#">FACEBOOK</a>
+            </div>
+          </section>
+
+          <nav class="f-group">
+            <h4>EXPLORAR</h4>
+            <a routerLink="/residencias">Residencias</a>
+            <a href="#">Sobre nosotros</a>
+            <a href="#">Contacto</a>
+          </nav>
+
+          <nav class="f-group">
+            <h4>LEGAL</h4>
+            <a href="#">Términos</a>
+            <a href="#">Privacidad</a>
+            <a href="#">Cookies</a>
+          </nav>
+        </div>
+
+        <div class="f-bottom-bar">
+          <small>© 2026 Habit. TODOS LOS DERECHOS RESERVADOS.</small>
+        </div>
+      </footer>
+  </main>
+</div>
