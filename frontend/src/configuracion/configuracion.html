@@ -1,0 +1,79 @@
+<div class="scroll-container">
+  <header class="navbar">
+    <div class="logo">
+      <img src="LOGO.png" alt="Logo" />
+    </div>
+
+    <nav class="nav-links">
+      <a routerLink="/habitaciones">INICIO</a>
+      <a routerLink="/residencias">RESIDENCIAS</a>
+      <a href="#">NOSOTROS</a>
+      <a href="#">CONTACTO</a>
+    </nav>
+
+    <div class="user-menu-container" *ngIf="usuarioLogueado">
+      <div class="user-pill" (click)="toggleMenu($event)">
+        <div class="avatar-container">
+          <img
+            [src]="usuarioLogueado.imagen || 'fotosUsuarios/iconoUsuario.png'"
+            alt="Perfil"
+            class="profile-pic"
+          />
+        </div>
+        <div class="user-info">
+          <span class="user-name-text">{{ usuarioLogueado.nombre }}</span>
+          <span class="user-email-text">{{ usuarioLogueado.email }}</span>
+        </div>
+        <span class="arrow">{{ menuAbierto ? '▲' : '▼' }}</span>
+      </div>
+
+      <div class="dropdown-menu" *ngIf="menuAbierto">
+        <button (click)="irAPerfil($event)" class="menu-item">MI PERFIL</button>
+        <button (click)="irAConfiguracion($event)" class="menu-item">CONFIGURACIÓN</button>
+        <div class="divider"></div>
+        <button (click)="cerrarSesion()" class="logout-btn">CERRAR SESIÓN</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="config-main">
+    <div class="config-wrapper">
+      <div class="header-back">
+        <a routerLink="/perfil" class="btn-volver-texto">VOLVER</a>
+        <hr class="linea-amarilla" />
+      </div>
+
+      <h1 class="titulo-config">CONFIGURACION</h1>
+      <br />
+      <div class="config-box">
+        <h2 class="box-title">APARIENCIA</h2>
+
+        <div class="sub-section">
+          <label class="label-bold">TEMA</label>
+          <div class="btn-group">
+            <button
+              type="button"
+              class="btn-selector"
+              [class.active]="temaSeleccionado === 'claro'"
+              (click)="seleccionarTema('claro')"
+            >
+              CLARO
+            </button>
+            <button
+              type="button"
+              class="btn-selector"
+              [class.active]="temaSeleccionado === 'oscuro'"
+              (click)="seleccionarTema('oscuro')"
+            >
+              OSCURO
+            </button>
+          </div>
+        </div>
+        <div class="sub-section">
+          <label class="label-bold">IDIOMA</label>
+          <button class="btn-selector full-width">ESPAÑOL</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

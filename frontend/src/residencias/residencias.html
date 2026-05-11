@@ -1,26 +1,152 @@
-<div class="residencias-grid">
-  <div class="residencia-card" *ngFor="let res of listaResidencias">
-    <div class="card-image">
-      <img [src]="res.imagen" [alt]="res.titulo">
-      <div class="badge-precio">{{ res.precio }}€<span>/mes</span></div>
+<div class="scroll-container">
+  <header class="navbar">
+    <div class="logo">
+      <img src="LOGO.png" alt="Logo" />
     </div>
-    
-    <div class="card-content">
-      <h3 class="residencia-titulo">{{ res.titulo | uppercase }}</h3>
-      
-      <div class="residencia-info">
-        <p><i class="fa-solid fa-location-dot"></i> {{ res.ubicacion }}</p>
-        <p><i class="fa-solid fa-bed"></i> {{ res.habitaciones }} Habitaciones</p>
+
+    <nav class="nav-links">
+      <a routerLink="/habitaciones">INICIO</a>
+      <a routerLink="/residencias">RESIDENCIAS</a>
+      <a (click)="scrollToSection('info-empresa')">NOSOTROS</a>
+      <a href="#">CONTACTO</a>
+    </nav>
+
+    <div class="user-menu-container" *ngIf="usuarioLogueado">
+      <div class="user-pill" (click)="toggleMenu($event)">
+        <div class="avatar-container">
+          <img
+            [src]="usuarioLogueado.imagen || 'fotosUsuarios/iconoUsuario.png'"
+            alt="Perfil"
+            class="profile-pic"
+          />
+        </div>
+        <div class="user-info">
+          <span class="user-name-text">{{ usuarioLogueado.nombre }}</span>
+          <span class="user-email-text">{{ usuarioLogueado.email }}</span>
+        </div>
+        <span class="arrow">{{ menuAbierto ? '▲' : '▼' }}</span>
       </div>
 
-      <div class="residencia-tags">
-        <span class="tag" *ngIf="res.wifi">WIFI</span>
-        <span class="tag" *ngIf="res.limpieza">LIMPIEZA</span>
+      <div class="dropdown-menu" *ngIf="menuAbierto">
+        <button (click)="irAPerfil($event)" class="menu-item">MI PERFIL</button>
+        <button
+          type="button"
+          routerLink="/configuracion"
+          (click)="menuAbierto = false"
+          class="menu-item"
+          style="z-index: 100005; position: relative"
+        >
+          CONFIGURACIÓN
+        </button>
+        <div class="divider"></div>
+        <button (click)="cerrarSesion()" class="logout-btn">CERRAR SESIÓN</button>
       </div>
-
-      <button class="btn-detalles" (click)="verDetalles(res.id)">
-        VER DISPONIBILIDAD
-      </button>
     </div>
+  </header>
+
+  <div class="search-filter-container">
+    <div class="filter-group">
+      <label>UBICACION</label>
+      <input type="text" [(ngModel)]="filtroUbicacion" placeholder="Ej: Bilbao" />
+    </div>
+
+    <div class="filter-group">
+      <label>PRECIO MIN</label>
+      <input type="number" [(ngModel)]="filtroPrecioMin" placeholder="0" />
+    </div>
+
+    <div class="filter-group">
+      <label>PRECIO MAX</label>
+      <input type="number" [(ngModel)]="filtroPrecioMax" placeholder="1000" />
+    </div>
+
+    <div class="filter-group">
+      <label>PERSONAS</label>
+      <input type="number" [(ngModel)]="filtroPersonas" placeholder="1" />
+    </div>
+
+    <button class="btn-buscar" (click)="aplicarFiltros()">BUSCAR</button>
   </div>
+
+  <div class="coleccion-residencias">
+  <div class="coleccion-header">
+    <h1 class="coleccion-titulo">COLECCIÓN ACTUAL</h1>
+    <br>
+    <div class="underline"></div>
+  </div>
+
+  <div class="residencias-grid-tres-columnas">
+    <article 
+      class="residencia-card-v2" 
+      *ngFor="let res of listaResidencias | paginate: { itemsPerPage: 6, currentPage: p }"
+    >
+      <div class="card-img-v2">
+        <img [src]="res.imagen" [alt]="res.titulo" />
+      </div>
+
+      <div class="card-body-v2">
+        <h3 class="res-title-v2">{{ res.titulo }}</h3>
+        
+        <div class="res-location-v2">
+          <span class="icon-orange">📍</span> {{ res.ubicacion }}
+        </div>
+        
+        <div class="res-meta-v2">
+          <span>👥 {{ res.residentes }}</span>
+          <span>🕒 Disponible</span>
+        </div>
+
+        <div class="card-footer-v2">
+          <div class="res-price-v2">
+            <span class="price-amount">{{ res.precio }}€</span>
+            <span class="price-period">/mes</span>
+          </div>
+          <a class="btn-ver-mas" [routerLink]="['/residencia', res.id]">
+            VER MÁS →
+          </a>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <div class="paginacion-controles">
+    <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente">
+    </pagination-controls>
+  </div>
+</div>
+  <footer class="footer-simple">
+        <div class="footer-inner">
+          <section class="f-main">
+            <div class="f-logo-box">
+              <img src="LOGO.png" alt="Logo" />
+            </div>
+            <p class="f-bio">
+              Revolucionando el alojamiento universitario en el País Vasco. <br />Cada espacio es
+              una declaración de estilo y comodidad.
+            </p>
+            <div class="f-socials">
+              <a href="#">INSTAGRAM</a>
+              <a href="#">FACEBOOK</a>
+            </div>
+          </section>
+
+          <nav class="f-group">
+            <h4>EXPLORAR</h4>
+            <a routerLink="/residencias">Residencias</a>
+            <a (click)="scrollToSection('info-empresa')">Sobre nosotros</a>
+            <a href="#">Contacto</a>
+          </nav>
+
+          <nav class="f-group">
+            <h4>LEGAL</h4>
+            <a href="#">Términos</a>
+            <a href="#">Privacidad</a>
+            <a href="#">Cookies</a>
+          </nav>
+        </div>
+
+        <div class="f-bottom-bar">
+          <small>© 2026 Habit. TODOS LOS DERECHOS RESERVADOS.</small>
+        </div>
+      </footer>
 </div>

@@ -1,53 +1,140 @@
 <div class="scroll-container">
   <header class="navbar">
     <div class="logo">
-      <img src="LOGO.png" alt="Logo" />
+      <img src="LOGO.png" alt="Logo Gemini" />
     </div>
 
     <nav class="nav-links">
-      <a href="#inicio">INICIO</a>
-      <a (click)="scrollToSection('residencias')">RESIDENCIAS</a>
-      <a href="#">NOSOTROS</a>
-      <a (click)="scrollToSection('contacto')">CONTACTO</a>
+      <a routerLink="/habitaciones">INICIO</a>
+      <a routerLink="/residencias">RESIDENCIAS</a>
+      <a (click)="scrollToSection('info-empresa')">NOSOTROS</a>
+      <a href="#">CONTACTO</a>
     </nav>
 
-    <div class="user-menu-container">
+    <div class="user-menu-container" *ngIf="usuarioLogueado">
       <div class="user-pill" (click)="toggleMenu($event)">
-        {{ nombreUsuario }}
+        <div class="avatar-container">
+          <img
+            [src]="usuarioLogueado.imagen || 'fotosUsuarios/iconoUsuario.png'"
+            alt="Perfil"
+            class="profile-pic"
+          />
+        </div>
+        <div class="user-info">
+          <span class="user-name-text">{{ usuarioLogueado.nombre }}</span>
+          <span class="user-email-text">{{ usuarioLogueado.email }}</span>
+        </div>
         <span class="arrow">{{ menuAbierto ? '▲' : '▼' }}</span>
       </div>
 
       <div class="dropdown-menu" *ngIf="menuAbierto">
         <button (click)="irAPerfil($event)" class="menu-item">MI PERFIL</button>
-        <button (click)="menuAbierto = false">CONFIGURACIÓN</button>
-        <hr style="border: 1px solid black; width: 100%" />
-        <button (click)="cerrarSesion()" style="color: red">CERRAR SESIÓN</button>
+        <button
+          type="button"
+          routerLink="/configuracion"
+          (click)="menuAbierto = false"
+          class="menu-item"
+        >
+          CONFIGURACIÓN
+        </button>
+        <div class="divider"></div>
+        <button (click)="cerrarSesion()" class="logout-btn">CERRAR SESIÓN</button>
       </div>
     </div>
   </header>
 
-  <section id="inicio" class="section">
-    <div class="hero-content">
-      <h1 class="title-alquila">ALQUILA</h1>
-      <h1 class="title-habitaciones">HABITACIONES</h1>
-      <p class="description">Accede a viviendas compartidas mediante una gestión ágil.</p>
+  <main class="main-content">
+    <div *ngIf="seccionActual === 'inicio'">
+      <section class="hero-full">
+        <div class="hero-content">
+          <div class="hero-text-side">
+            <h1 class="title-alquila">ALQUILA</h1>
+            <h1 class="title-habitaciones">HABITACIONES</h1>
+            <p class="description">
+              Accede a viviendas compartidas mediante una gestión ágil y digital.
+            </p>
+          </div>
+
+          <div class="scroll-hint" (click)="scrollToSection('info-empresa')">
+            <span class="scroll-text">DESLIZA</span>
+            <div class="arrow-down">▼</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats-banner">
+        <div class="stat-item">
+          <span class="stat-number">150+</span>
+          <span class="stat-label">RESIDENCIAS</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">1.5K+</span>
+          <span class="stat-label">MIEMBROS</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">94%</span>
+          <span class="stat-label">SATISFACCIÓN</span>
+        </div>
+      </section>
+
+      <section id="info-empresa" class="nosotros-section">
+        <h2 class="section-title">¿POR QUÉ NOSOTROS?</h2>
+        <div class="nosotros-grid">
+          <article class="nosotros-item">
+            <div class="icon-box">🛡️</div>
+            <h3>SEGURIDAD GARANTIZADA</h3>
+            <p>Procesos de verificación rigurosos para tu total tranquilidad.</p>
+          </article>
+
+          <article class="nosotros-item">
+            <div class="icon-box">⭐</div>
+            <h3>ALTA CALIDAD</h3>
+            <p>Espacios seleccionados con diseño contemporáneo y moderno.</p>
+          </article>
+
+          <article class="nosotros-item">
+            <div class="icon-box">👥</div>
+            <h3>COMUNIDAD EXCLUSIVA</h3>
+            <p>Conecta con personas que comparten tu estilo de vida.</p>
+          </article>
+        </div>
+      </section>
+
+      <footer class="footer-simple">
+        <div class="footer-inner">
+          <section class="f-main">
+            <div class="f-logo-box">
+              <img src="LOGO.png" alt="Logo" />
+            </div>
+            <p class="f-bio">
+              Revolucionando el alojamiento universitario en el País Vasco. <br />Cada espacio es
+              una declaración de estilo y comodidad.
+            </p>
+            <div class="f-socials">
+              <a href="#">INSTAGRAM</a>
+              <a href="#">FACEBOOK</a>
+            </div>
+          </section>
+
+          <nav class="f-group">
+            <h4>EXPLORAR</h4>
+            <a routerLink="/residencias">Residencias</a>
+            <a (click)="scrollToSection('info-empresa')">Sobre nosotros</a>
+            <a href="#">Contacto</a>
+          </nav>
+
+          <nav class="f-group">
+            <h4>LEGAL</h4>
+            <a href="#">Términos</a>
+            <a href="#">Privacidad</a>
+            <a href="#">Cookies</a>
+          </nav>
+        </div>
+
+        <div class="f-bottom-bar">
+          <small>© 2026 Habit. TODOS LOS DERECHOS RESERVADOS.</small>
+        </div>
+      </footer>
     </div>
-    <div class="scroll-hint">
-      <span>DESLIZA</span>
-      <div class="arrow-down">↓</div>
-    </div>
-  </section>
-
-  <section id="residencias" class="section bg-black">
-    <h1 class="section-title">NUESTRAS RESIDENCIAS</h1>
-    <app-residencias></app-residencias>
-  </section>
-
-  <section id="nosotros" class="section">
-    <h1 class="section-title">SOBRE NOSOTROS</h1>
-  </section>
-
-  <section id="contacto" class="section bg-orange">
-    <h1 class="section-title">CONTACTO</h1>
-  </section>
+  </main>
 </div>
